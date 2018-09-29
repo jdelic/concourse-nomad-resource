@@ -2,7 +2,9 @@ FROM debian:stretch-slim
 
 ENV NOMAD_VERSION "0.8.6"
 
-RUN apt update && apt install curl jq coreutils
+RUN apt-get update && \
+    apt -q -y -o DPkg::Options::=--force-confold \
+    -o DPkg::Options::=--force-confdef install curl jq coreutils
 
 ADD https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip nomad.zip
 RUN unzip nomad.zip
