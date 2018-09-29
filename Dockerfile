@@ -7,8 +7,6 @@ RUN apt-get update && \
     -o DPkg::Options::=--force-confdef install curl jq coreutils unzip
 
 ADD https://releases.hashicorp.com/nomad/${NOMAD_VERSION}/nomad_${NOMAD_VERSION}_linux_amd64.zip nomad.zip
-RUN unzip nomad.zip
-RUN mv nomad /usr/bin/nomad
-RUN chmod +x /usr/bin/nomad
+RUN unzip nomad.zip && mv nomad /usr/bin/nomad && chmod +x /usr/bin/nomad && mkdir /opt/resource
 
-COPY bin/* /opt/resource
+COPY bin/* /opt/resource/
